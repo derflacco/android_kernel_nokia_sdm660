@@ -5778,14 +5778,12 @@ static int mdss_mdp_overlay_on(struct msm_fb_data_type *mfd)
 
 panel_on:
 	if (mdp5_data->vsync_en) {
-		if ((ctl) && (ctl->ops.add_vsync_handler)) {
-			pr_info("reenabling vsync for fb%d\n", mfd->index);
-			mdss_mdp_clk_ctrl(MDP_BLOCK_POWER_ON);
-			rc = ctl->ops.add_vsync_handler(ctl,
-					 &ctl->vsync_handler);
-			mdss_mdp_clk_ctrl(MDP_BLOCK_POWER_OFF);
-		}
+		pr_info("reenabling vsync for fb%d\n", mfd->index);
+		mdss_mdp_clk_ctrl(MDP_BLOCK_POWER_ON);
+		rc = ctl->ops.add_vsync_handler(ctl, &ctl->vsync_handler);
+		mdss_mdp_clk_ctrl(MDP_BLOCK_POWER_OFF);
 	}
+
 	if (IS_ERR_VALUE(rc)) {
 		pr_err("Failed to turn on fb%d\n", mfd->index);
 		mdss_mdp_overlay_off(mfd);
