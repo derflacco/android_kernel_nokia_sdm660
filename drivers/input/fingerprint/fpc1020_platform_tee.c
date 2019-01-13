@@ -61,6 +61,17 @@ static const char * const pctl_names[] = {
 	"fpc1020_irq_active",
 };
 
+struct vreg_config {
+	char *name;
+	unsigned long vmin;
+	unsigned long vmax;
+	int ua_load;
+};
+
+static const struct vreg_config vreg_conf[] = {
+	{ "vdd_ana", 1800000UL, 1800000UL, 6000, },
+};
+
 struct fpc1020_data {
 	struct device *dev;
 
