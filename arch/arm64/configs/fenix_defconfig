@@ -3213,7 +3213,7 @@ CONFIG_SND_SOC_COMPRESS=y
 #
 # SoC Audio for Freescale CPUs
 #
-
+CONFIG_FB_MSM_MDSS_KCAL_CTRL=y
 #
 # Common SoC Audio options for Freescale CPUs:
 #
