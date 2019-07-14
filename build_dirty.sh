@@ -22,7 +22,7 @@ ZIP_NAME="$VERSION"-"$DATE"
 VERSION="-Fenix-"
 DATE=$(date +%Y%m%d-%H%M)
 
-export KBUILD_BUILD_USER=builder
+export KBUILD_BUILD_USER=IlFlacco
 export KBUILD_BUILD_HOST=FlaccoMachine
 export ARCH=arm64
 export SUBARCH=arm64
@@ -34,11 +34,11 @@ make_zip()
                 cd $REPACK_DIR
                # mkdir kernel
                 #mkdir dtbs
-                #cp $KERNEL_DIR/out/arch/arm64/boot/Image.gz $REPACK_DIR/kernel/
-                rm $KERNEL_DIR/out/arch/arm64/boot/dts/qcom/modules.order
-                #cp $KERNEL_DIR/out/arch/arm64/boot/dts/qcom/sd* $REPACK_DIR/dtbs/
-                cp $KERNEL_DIR/out/arch/arm64/boot/Image.gz-dtb $REPACK_DIR/
-		FINAL_ZIP="Reborn-${VERSION}-${DATE}.zip"
+                #cp $KERNEL_DIR/output/arch/arm64/boot/Image.gz $REPACK_DIR/kernel/
+                rm $KERNEL_DIR/output/arch/arm64/boot/dts/qcom/modules.order
+                #cp $KERNEL_DIR/output/arch/arm64/boot/dts/qcom/sd* $REPACK_DIR/dtbs/
+                cp $KERNEL_DIR/output/arch/arm64/boot/Image.gz-dtb $REPACK_DIR/
+		FINAL_ZIP="EAS${VERSION}-${DATE}.zip"
         zip -r9 "${FINAL_ZIP}" *
 		cp *.zip $OUT
 		rm *.zip
