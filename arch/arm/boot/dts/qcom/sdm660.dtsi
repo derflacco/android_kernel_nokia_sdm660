@@ -287,66 +287,66 @@
 		};
 	};
 
-        energy_costs: energy-costs {
-                compatible = "sched-energy";
+	energy_costs: energy-costs {
+		compatible = "sched-energy";
 
-                CPU_COST_0: core-cost0 {
-                        busy-cost-data = <
-                                193 24
-                                274 43
-                                339 64
-                                426 92
-                                467 112
-                                532 176
-                                560 206
-                        >;
-                        idle-cost-data = <
-                                20 16 12 8
-                        >;
-                };
-                CPU_COST_1: core-cost1 {
-                        busy-cost-data = <
-                                516 1792
-                                650 2819
-                                809 4583
-                                811 5038
-                                908 6418
-                                995 7118
-                                1024 7302
-                        >;
+		CPU_COST_0: core-cost0 {
+			busy-cost-data = <
+				193 24
+				274 43
+				339 64
+				426 92
+				467 112
+				532 176
+				560 206
+			>;
+			idle-cost-data = <
+				20 16 12 8
+			>;
+		};
+		CPU_COST_1: core-cost1 {
+			busy-cost-data = <
+				516 1792
+				650 2819
+				809 4583
+				811 5038
+				908 6418
+				995 7118
+				1024 7302
+			>;
                         idle-cost-data = <
                                 100 80 60 40
-                        >;
-                };
-                CLUSTER_COST_0: cluster-cost0 {
-                        busy-cost-data = <
-                                192 8
-                                274 14
-                                338 20
-                                426 29
-                                466 35
-                                531 49
-                                560 57
-                        >;
-                        idle-cost-data = <
-                                4 3 2 1
-                        >;
-                };
-                CLUSTER_COST_1: cluster-cost1 {
-                        busy-cost-data = <
-                                515 135
-                                651 193
-                                812 272
-                                809 292
-                                908 363
-                                994 397
-                                1024 406
-                        >;
-                        idle-cost-data = <
-                                4 3 2 1
-                        >;
-                };
-        };
+			>;
+		};
+		CLUSTER_COST_0: cluster-cost0 {
+			busy-cost-data = <
+				193 8
+				274 14
+				339 20
+				426 29
+				467 35
+				532 49
+				560 57
+			>;
+			idle-cost-data = <
+				4 3 2 1
+			>;
+		};
+		CLUSTER_COST_1: cluster-cost1 {
+			busy-cost-data = <
+				516 135
+				650 193
+				809 272
+				811 292
+				908 363
+				995 397
+				1024 406
+			>;
+			idle-cost-data = <
+				4 3 2 1
+			>;
+		};
+	};
 
 	clocks {
 		xo_board {
