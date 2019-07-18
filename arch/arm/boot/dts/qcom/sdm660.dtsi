@@ -314,8 +314,8 @@
 				995 7118
 				1024 7302
 			>;
-                        idle-cost-data = <
-                                100 80 60 40
+             idle-cost-data = <
+                100 80 60 40
 			>;
 		};
 		CLUSTER_COST_0: cluster-cost0 {
