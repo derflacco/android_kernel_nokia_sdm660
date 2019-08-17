@@ -131,5 +131,4 @@ static inline bool task_is_booster(struct task_struct *tsk)
 	       !strcmp(comm, "init.qcom.post_");
 }
 
->>>>>>> bf0fa4a... exec: Add node tampering blacklist function
 #endif /* _LINUX_BINFMTS_H */
