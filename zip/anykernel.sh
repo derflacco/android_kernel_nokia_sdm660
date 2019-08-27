@@ -69,5 +69,5 @@ mount -o ro,remount -t auto /vendor >/dev/null;
 # end ramdisk changes
 
 write_boot;
-
+  ui_print " "; ui_print "ALWAYS COMPILE 80'S CASSETTE DRIVERS"
 ## end install
