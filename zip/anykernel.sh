@@ -69,5 +69,5 @@ mount -o ro,remount -t auto /vendor >/dev/null;
 # end ramdisk changes
 
 write_boot;
-  ui_print " "; ui_print "ALWAYS COMPILE 80'S CASSETTE DRIVERS"
+  ui_print " "; ui_print "The world is full of good bois. If you can't find one, be one."
 ## end install
