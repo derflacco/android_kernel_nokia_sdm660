@@ -1608,9 +1608,9 @@ static int fts_ts_resume(struct device *dev)
         return -1;
     }
 
-#if (!FTS_CHIP_IDC)
+//#if (!FTS_CHIP_IDC)
     fts_reset_proc(200);
-#endif
+//#endif
 
     fts_tp_state_recovery(data->client);
 
@@ -1692,22 +1692,24 @@ static struct i2c_driver fts_ts_driver =
 static int __init fts_ts_init(void)
 {
     int ret = 0;
-	if (strstr(saved_command_line, "androidboot.device=PL2") != NULL)
-    { 
-        if (gpio_get_value(12) == 1)
-        {
-                FTS_INFO("[snow] lcm is hlt exit fts init ");
-                return 0;
-        }
-    }
+	if (strstr(saved_command_line, "androidboot.device=TAS") == NULL) {
+		if (strstr(saved_command_line, "androidboot.device=PL2") != NULL)
+	    { 
+	        if (gpio_get_value(12) == 1)
+	        {
+	                FTS_INFO("[snow] lcm is hlt exit fts init ");
+	                return 0;
+	        }
+	    }
 
-    FTS_FUNC_ENTER();
-    ret = i2c_add_driver(&fts_ts_driver);
-    if ( ret != 0 )
-    {
-        FTS_ERROR("Focaltech touch screen driver init failed!");
-    }
-    FTS_FUNC_EXIT();
+	    FTS_FUNC_ENTER();
+	    ret = i2c_add_driver(&fts_ts_driver);
+	    if ( ret != 0 )
+	    {
+	        FTS_ERROR("Focaltech touch screen driver init failed!");
+	    }
+	    FTS_FUNC_EXIT();
+	}
     return ret;
 }
 
@@ -1720,7 +1722,9 @@ static int __init fts_ts_init(void)
 *****************************************************************************/
 static void __exit fts_ts_exit(void)
 {
-    i2c_del_driver(&fts_ts_driver);
+	if (strstr(saved_command_line, "androidboot.device=TAS") == NULL) {
+	    i2c_del_driver(&fts_ts_driver);
+	}
 }
 
 module_init(fts_ts_init);
