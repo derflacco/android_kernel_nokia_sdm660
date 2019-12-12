@@ -96,6 +96,8 @@
 #include <trace/events/sched.h>
 #include "walt.h"
 
+ATOMIC_NOTIFIER_HEAD(load_alert_notifier_head);
+
 DEFINE_MUTEX(sched_domains_mutex);
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
 
