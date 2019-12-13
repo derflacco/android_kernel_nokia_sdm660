@@ -19,16 +19,12 @@ KERNEL_DIR=$PWD
 REPACK_DIR=$KERNEL_DIR/zip
 OUT=$KERNEL_DIR/output
 ZIP_NAME="$VERSION"-"$DATE"
-VERSION="-Fenix-"
+VERSION="Fenix"
 DATE=$(date +%Y%m%d-%H%M)
 
-export KBUILD_BUILD_USER=IlFlacco
-export KBUILD_BUILD_HOST=FlaccoMachine
 export ARCH=arm64
 export SUBARCH=arm64
 export USE_CCACHE=1
-export CROSS_COMPILE=/home/derflacco/gcc-linaro-5.5.0-2017.10-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
-make clean
 make_zip()
 {
                 cd $REPACK_DIR
@@ -38,7 +34,7 @@ make_zip()
                 rm $KERNEL_DIR/output/arch/arm64/boot/dts/qcom/modules.order
                 #cp $KERNEL_DIR/output/arch/arm64/boot/dts/qcom/sd* $REPACK_DIR/dtbs/
                 cp $KERNEL_DIR/output/arch/arm64/boot/Image.gz-dtb $REPACK_DIR/
-		FINAL_ZIP="EAS${VERSION}-${DATE}.zip"
+		FINAL_ZIP="EAS-${VERSION}-${DATE}.zip"
         zip -r9 "${FINAL_ZIP}" *
 		cp *.zip $OUT
 		rm *.zip
@@ -48,8 +44,11 @@ make_zip()
 		rm out/arch/arm64/boot/Image.gz-dtb
 }
 
-make nokia_defconfig O=output/
-make -j$(nproc --all) O=output/
+make clean && make mrproper
+PATH="/home/derflacco/toolchains/aosp_clang/bin:/home/derflacco/toolchains/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu/bin/:/home/derflacco/toolchains/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabi/bin/:${PATH}"
+make O=output ARCH=arm64 fenix_defconfig
+make -j$(nproc --all) O=output ARCH=arm64 CC="ccache clang -fcolor-diagnostics -Qunused-arguments" CLANG_TRIPLE="aarch64-linux-gnu-" CROSS_COMPILE="/home/derflacco/toolchains/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-" CROSS_COMPILE_ARM32="/home/derflacco/toolchains/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabi/bin/arm-linux-gnueabi-"
+
 make_zip
 
 BUILD_END=$(date +"%s")
@@ -59,7 +58,7 @@ rm -rf zip/Image.gz-dtb
 rm -rf zip/dtbs
 echo -e ""
 echo -e ""
-echo -e "DFK KERNEL"
+echo -e "Be a good boi!"
 echo -e ""
 echo -e ""
 echo -e "Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
