@@ -25,8 +25,16 @@ DATE=$(date +%Y%m%d-%H%M)
 
 export ARCH=arm64
 export SUBARCH=arm64
-export LD_LIBRARY_PATH=/home/derflacco/toolchains/proton_clang-11.0.0-20200117/lib/
-	export USE_CCACHE=1
+export LD_LIBRARY_PATH=/home/derflacco/toolchains/proton-clang-20200613/lib/
+export USE_CCACHE=1
+defconfig=/fenix_defconfig
+
+
+PATH="/home/derflacco/toolchains/proton-clang-20200613/bin:$PATH"
+export CROSS_COMPILE=aarch64-linux-gnu-
+make $defconfig CC=clang O=output/
+
+make -j$(nproc --all) CC="ccache clang -fcolor-diagnostics -Qunused-arguments" O=output/
 
 make_zip()
 {
@@ -46,12 +54,6 @@ make_zip()
 		cd $KERNEL_DIR
 		rm output/arch/arm64/boot/Image.gz-dtb
 }
-
-make clean && make mrproper
-PATH="/home/derflacco/toolchains/proton_clang-11.0.0-20200117/bin:/home/derflacco/toolchains/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu/bin${PATH}"
-make O=output ARCH=arm64 fenix_defconfig
-make -j$(nproc --all) O=output ARCH=arm64 CC="ccache clang -fcolor-diagnostics -Qunused-arguments" CLANG_TRIPLE="aarch64-linux-gnu-" CROSS_COMPILE="/home/derflacco/toolchains/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-"
-
 
 make_zip
 
